@@ -16,8 +16,8 @@ async function fetchAbout(id) {
     //debug 测试请求
     //const res = await axios.get(`https://tc-0glpuj1k4e75e5ec-1300876583.ap-shanghai.service.tcloudbase.com/luogu?id=${id}`);
 
-    const res = await axios.get(`https://www.luogu.com.cn/user/${id}?_contentOnly`)
-
+    const res = await axios.get(`https://www.luogu.com.cn/user/${id}`)
+    
     const about = {
         name: "NULL",
         color: "Gray",
@@ -29,10 +29,24 @@ async function fetchAbout(id) {
         userType:"Not found.",
         tag:""
     }
-    if(res.data.code !== 200) {
+    if(res.status !== 200) {
         return about;
     }
-    const user = res.data.currentData.user;
+    const json = JSON.parse(
+        res.data.slice(
+            res.data.indexOf(
+                `<script id="lentille-context" type="application/json">`
+            ) + `<script id="lentille-context" type="application/json">`.length,
+            res.data.indexOf(
+                `</script>`,
+                res.data.indexOf(
+                    `<script id="lentille-context" type="application/json">`
+                )
+            )
+        )
+    );
+    
+    const user = json.data.user;
     
     about.name = decodeURI(user.name);
     about.color = decodeURI(user.color);
