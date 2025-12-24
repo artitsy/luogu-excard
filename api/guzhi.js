@@ -3,26 +3,29 @@ const { fetchAbout } = require("../src/about-card.js");
 const { renderError } = require("../src/common.js")
 const axios = require("axios");
 
-async function fetchGuzhi(id, ranking) {
-    var page=Math.floor((ranking-1)/50) + 1;
+async function fetchGuzhi(id) {
     
-    const res = await axios.get(`https://www.luogu.com.cn/ranking?page=${page}&_contentOnly`);
+    const res = await axios.get(`https://www.luogu.com.cn/user/${id}`)
     
-    if(res.data.code != 200) {
+    if(res.status !== 200) {
         return "Not found.";
     }
-    
-    const rankList=res.data.currentData.rankList.result;
-    
-    for(var index=0;index<50;index++) {
-        if(!rankList[index]) {
-            continue;
-        }
-        if(rankList[index].user.uid==id) {
-            return `${rankList[index].basicRating},${rankList[index].practiceRating},${rankList[index].socialRating},${rankList[index].contestRating},${rankList[index].prizeRating}`;
-        }
-    }
-    return `Not found.`;
+    const json = JSON.parse(
+        res.data.slice(
+            res.data.indexOf(
+                `<script id="lentille-context" type="application/json">`
+            ) + `<script id="lentille-context" type="application/json">`.length,
+            res.data.indexOf(
+                `</script>`,
+                res.data.indexOf(
+                    `<script id="lentille-context" type="application/json">`
+                )
+            )
+        )
+    );
+
+    const rankList=json.data.gu;
+    return `${rankList.scores.basic},${rankList.scores.practice},${rankList.scores.social},${rankList.scores.contest},${rankList.scores.prize}`;
 }
 
 module.exports = async (req, res) => {
@@ -52,15 +55,8 @@ module.exports = async (req, res) => {
         about = await fetchAbout(id);
     }
     
-    if(about.ranking>=1&&about.ranking<=1000)
-    {
-        finally_scores=await fetchGuzhi(id, about.ranking);
-        if(finally_scores=="Not found.")
-        {
-            finally_scores=scores;
-        }
-    }
-    else
+    finally_scores=await fetchGuzhi(id);
+    if(finally_scores=="Not found.")
     {
         finally_scores=scores;
     }

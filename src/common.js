@@ -1,4 +1,20 @@
-const anafanafo = require('anafanafo');
+const path = require('path');
+const { createCanvas, registerFont } = require('canvas');
+
+try {
+    registerFont(path.resolve(__dirname, '..', 'public', 'fonts', 'Code.ttf'), { family: 'Code' });
+} catch (e) {
+    // ignore if registration fails in environments without canvas support
+}
+
+const measureText = (str, fontSize = 12, fontFamily = 'Code') => {
+    if (!str) return 0;
+    const canvas = createCanvas(0, 0);
+    const ctx = canvas.getContext('2d');
+    ctx.font = `${fontSize}px "${fontFamily}"`;
+    const metrics = ctx.measureText(String(str));
+    return Math.ceil(metrics.width);
+}
 
 const NAMECOLOR = {
     "Gray": "#bbbbbb",
@@ -11,70 +27,65 @@ const NAMECOLOR = {
 }
 
 const color16 = (str) => {
-	return '#' + str.replace('#', '');
+    return '#' + str.replace('#', '');
 }
 
 class ANum {
-	constructor({
-		number = 0,
-		co_fr = "#000000",
-		co_ba = "#ffffff",
-		co_br = "#e4e2e2",
-		fo_si = 30,
-	}) {
-		this.number = number;
-		this.co_fr = color16(co_fr);
-		this.co_ba = color16(co_ba);
-		this.co_br = color16(co_br);
-		this.fo_si = fo_si;
-	}
-	
-	render() {
-		
-		//let height = this.fo_si + 10;
-		let height = this.fo_si;
-		let width = height * 0.6;
-		
-		let takx = height * 0.2;
-		let taky = height * 0.8;
-		
-		let renum = "";
-		
-		let x = String(this.number);
-		
-		for (let c of x)
-		{
-			renum += `
-				<text transform="translate(${takx}, ${taky})" font-size="${this.fo_si}" font-family="Code, Verdana, Microsoft Yahei">${c}</text>`
-			takx += width;
-		}
-		width = takx + height * 0.2;
-		
-		let head = `
-			<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none">`;
-		
-		let css = `
-			<style>
-   				@font-face{
-					font-family: 'Code';
-					src: url('https://font-rho.vercel.app/ttf/Code.ttf');
-     					font-display: swap;
-				}
-				text {
-					text-rendering: geometricPrecision;
-					font-weight: bold;
-					background: ${this.co_ba};
-					fill: ${this.co_fr};
-				}
-			</style>`;
-		
-		let rect = `
-			<rect rx="5%" height="99%" stroke="${this.co_br}" width="99%" fill="${this.co_ba}" stroke-opacity="1"/>`;
-		
-		let end = `
-			</svg>`;
-		return head + css + rect + renum + end;
-	}
+    constructor({
+        number = 0,
+        co_fr = "#000000",
+        co_ba = "#ffffff",
+        co_br = "#e4e2e2",
+        fo_si = 30,
+    }) {
+        this.number = number;
+        this.co_fr = color16(co_fr);
+        this.co_ba = color16(co_ba);
+        this.co_br = color16(co_br);
+        this.fo_si = fo_si;
+    }
+    
+    render() {
+        
+        //let height = this.fo_si + 10;
+        let height = this.fo_si;
+        let width = height * 0.6;
+        
+        let takx = height * 0.2;
+        let taky = height * 0.8;
+        
+        let renum = "";
+        
+        let x = String(this.number);
+        
+        for (let c of x)
+        {
+            renum += `
+                <text transform="translate(${takx}, ${taky})" font-size="${this.fo_si}" font-family="consolas, Verdana, Microsoft Yahei">${c}</text>`
+            takx += width;
+        }
+        width = takx + height * 0.2;
+        
+        let head = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none">`;
+        
+        let css = `
+            <style>
+                text {
+                    text-rendering: geometricPrecision;
+                    font-weight: bold;
+                    background: ${this.co_ba};
+                    fill: ${this.co_fr};
+                }
+            </style>`;
+        
+        let rect = `
+            <rect rx="5%" height="99%" stroke="${this.co_br}" width="99%" fill="${this.co_ba}" stroke-opacity="1"/>`;
+        
+        let end = `
+            </svg>`;
+        return head + css + rect + renum + end;
+    }
 }
 
 class Card {
@@ -239,8 +250,8 @@ const renderNameTitle = (name, color, ccfLevel, title, cardWidth, rightTop, tag)
     {
         tag="作弊者";
     }
-    const tagLength = anafanafo(tag)/10*1.2;
-    const nameLength = anafanafo(name)/10*1.8;
+    const tagLength = tag ? measureText(tag, 12, 'Verdana') : 0;
+    const nameLength = measureText(name, 18, 'Verdana');
     const nameColor = NAMECOLOR[color];
     const tagSVG = tag?`<defs><filter x="-0.05" y="-0.05" width="1.1" height="1.1" id="tagFilter"><feFlood flood-color="${nameColor}"/><feComposite in="SourceGraphic"/></filter></defs><text filter="url(#tagFilter)" x="${nameLength + (ccfLevel < 3 ? 10 : 28)}" y="-1" fill="white" font-weight="bold" textLength="${tagLength}" font-size="12">${tag}</text>`:``;
 

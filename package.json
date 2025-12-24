@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@vercel/node": "^5.5.16"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "canvas": "^3.1.2"
+  }
+}

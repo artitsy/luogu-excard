@@ -15,7 +15,7 @@ async function fetchStats(id) {
     //debug 测试请求
     //const res = await axios.get(`https://tc-0glpuj1k4e75e5ec-1300876583.ap-shanghai.service.tcloudbase.com/luogu?id=${id}`);
 
-    const res = await axios.get(`https://www.luogu.com.cn/user/${id}?_contentOnly`)
+    const res = await axios.get(`https://www.luogu.com.cn/user/${id}/practice`)
 
     const stats = {
         name: "NULL",
@@ -24,12 +24,25 @@ async function fetchStats(id) {
         passed: [0,0,0,0,0,0,0,0],
         hideInfo: false
     }
-    if(res.data.code !== 200) {
+    if(res.status !== 200) {
         return stats;
     }
+    const json = JSON.parse(
+        res.data.slice(
+            res.data.indexOf(
+                `<script id="lentille-context" type="application/json">`
+            ) + `<script id="lentille-context" type="application/json">`.length,
+            res.data.indexOf(
+                `</script>`,
+                res.data.indexOf(
+                    `<script id="lentille-context" type="application/json">`
+                )
+            )
+        )
+    );
 
-    const user = res.data.currentData.user;
-    const passed = res.data.currentData.passedProblems;
+    const user = json.data.user;
+    const passed = json.data.passed;
 
     if(!passed) {
         stats.hideInfo = true;
