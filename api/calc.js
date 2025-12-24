@@ -4,7 +4,6 @@ const { renderError, ANum} = require("../src/common.js");
 module.exports = async (req, res) => {
     const { 
         ask,
-        disable_cache,
         co_fr,
         co_ba,
         co_br,
