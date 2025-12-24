@@ -25,7 +25,7 @@
 
 - [x] 通过数加减法
 - [ ] 用户练习情况比较
-- [ ] 链接域名以支持国内直接使用
+- [x] 链接域名以支持国内直接使用
 
 ## 如何使用
 
@@ -37,25 +37,25 @@
 
 ### 基本信息
 
-![Sin Watt 的基本信息](https://luogu-excard.vercel.app/about?id=883464)
+![Sin Watt 的基本信息](https://c.limit-ser.top/about?id=883464)
 
 此卡片用于显示一个用户的基本信息，包括用户类型、关注、咕值排名、个性签名。
 
 ```markdown
-![Sin Watt 的基本信息](https://luogu-excard.vercel.app/about?id=883464)
+![Sin Watt 的基本信息](https://c.limit-ser.top/about?id=883464)
 ```
 
 ### 练习情况
 
-![Sin Watt 的练习情况](https://luogu-excard.vercel.app/practice?id=883464)
+![Sin Watt 的练习情况](https://c.limit-ser.top/practice?id=883464)
 
 ```markdown
-![Sin Watt 的练习情况](https://luogu-excard.vercel.app/practice?id=883464)
+![Sin Watt 的练习情况](https://c.limit-ser.top/practice?id=883464)
 ```
 
 ### 咕值信息
 
-![Sin Watt 的咕值信息](https://luogu-excard.vercel.app/guzhi?id=883464)
+![Sin Watt 的咕值信息](https://c.limit-ser.top/guzhi?id=883464)
 
 ~~咕值信息一般无法自动获取数据，如果需要必须要提供cookie，但是这种方法十分不安全，并且不方便。所以获取咕值卡片可能需要手动输入咕值信息，具体使用方法如下：~~
 
@@ -64,7 +64,7 @@
 现在 luogu 支持查看别人的咕值了。
 
 ```markdown
-![Sin Watt 的咕值信息](https://luogu-excard.vercel.app/guzhi?id=883464)
+![Sin Watt 的咕值信息](https://c.limit-ser.top/guzhi?id=883464)
 ```
 
 
@@ -72,10 +72,10 @@
 
 引用通过题目的数量进行加减，返回一个数字。这个东西用法宽泛。比如
 
-> 距离做题数严格单调递增，仅差![220](https://luogu-excard.vercel.app/calc?ask=883464_6-883464_7+1&co_fr=e74c3c)道黑题
+> 距离做题数严格单调递增，仅差![220](https://c.limit-ser.top/calc?ask=883464_6-883464_7+1&co_fr=e74c3c)道黑题
 
 ```markdown
-距离做题数严格单调递增，仅差![220](https://luogu-excard.vercel.app/calc?ask=883464_6-883464_7+1&co_fr=e74c3c)道黑题
+距离做题数严格单调递增，仅差![220](https://c.limit-ser.top/calc?ask=883464_6-883464_7+1&co_fr=e74c3c)道黑题
 ```
 
 关于问号后的参数。
@@ -96,32 +96,32 @@
 1. **隐藏标题**，只需在链接最后带上`&hide_title=true`即可，例如：
 
    ```markdown
-   ![Sin Watt 的练习情况](https://luogu-excard.vercel.app/practice?id=883464&hide_title=true)
+   ![Sin Watt 的练习情况](https://c.limit-ser.top/practice?id=883464&hide_title=true)
    ```
 
    效果：
 
-   ![Sin Watt 的练习情况](https://luogu-excard.vercel.app/practice?id=883464&hide_title=true)
+   ![Sin Watt 的练习情况](https://c.limit-ser.top/practice?id=883464&hide_title=true)
 
 2. **黑暗模式**，只需在链接最后带上`&dark_mode=true`即可，例如：
 
    ```markdown
-   ![Sin Watt 的练习情况](https://luogu-excard.vercel.app/practice?id=883464&dark_mode=true)
+   ![Sin Watt 的练习情况](https://c.limit-ser.top/practice?id=883464&dark_mode=true)
    ```
 
    效果：
 
-   ![Sin Watt 的练习情况](https://luogu-excard.vercel.app/practice?id=883464&dark_mode=true)
+   ![Sin Watt 的练习情况](https://c.limit-ser.top/practice?id=883464&dark_mode=true)
 
 3. **自定义宽度**，默认500，限制宽度在500到1920之间，只需在链接最后带上`&card_width=需要的宽度`即可，例如：
 
    ```markdown
-   ![Sin Watt 的练习情况](https://luogu-excard.vercel.app/practice?id=883464&card_width=750)
+   ![Sin Watt 的练习情况](https://c.limit-ser.top/practice?id=883464&card_width=750)
    ```
 
    效果：
 
-   ![Sin Watt 的练习情况](https://luogu-excard.vercel.app/practice?id=883464&card_width=750)
+   ![Sin Watt 的练习情况](https://c.limit-ser.top/practice?id=883464&card_width=750)
    
 4. **禁用缓存**，默认情况下，程序会有12小时的缓存。但是只需在链接最后带上`&disable_cache=true`即可禁用缓存，每次访问都将刷新。
 
